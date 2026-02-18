@@ -1,6 +1,6 @@
-name = "serverless-dns"
+name = "sdns"
 main = "./dist/worker.js"
-workers_dev = true
+workers_dev = false
 # logpush job is setup to capture from envs ending: log, pro, or one
 logpush = false
 # use node_compat or custom build
@@ -9,6 +9,9 @@ compatibility_date = "2023-03-21"
 send_metrics = false
 minify = false
 upload_source_maps = true
+
+[placement]
+mode = "smart"
 
 # uncomment to enable analytics on serverless-dns
 # this binding is not inherited by other worker-envs
@@ -24,10 +27,19 @@ command = "npm run build"
 type = "ESModule"
 globs = ["**/*.js"]
 
+[[routes]]
+pattern = "dns.phuchien.ovh"
+custom_domain = true
+
 [vars]
 LOG_LEVEL = "debug"
-WORKER_ENV = "development"
+WORKER_ENV = "production"
 CLOUD_PLATFORM = "cloudflare"
+CF_DNS_RESOLVER_URL = "https://cloudflare-dns.com/dns-query"
+CF_DNS_RESOLVER_URL_2 = "https://cloudflare-dns.com/dns-query"
+DISABLE_BLOCKLISTS = "false"
+MAX_DNS_RESOLVER_URL = "https://max.rethinkdns.com/"
+PROFILE_DNS_RESOLVES = "false"
 
 ##################
 #------PROD------#

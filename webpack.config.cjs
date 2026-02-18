@@ -39,7 +39,8 @@ module.exports = {
 
   optimization: {
     usedExports: true,
-    minimize: false,
+    minimize: true,
+    sideEffects: true,
   },
 
   experiments: {
