@@ -1,4 +1,4 @@
-name = "serverless-dns"
+name = "quad9"
 main = "./dist/worker.js"
 workers_dev = true
 # logpush job is setup to capture from envs ending: log, pro, or one
@@ -9,6 +9,10 @@ compatibility_date = "2023-03-21"
 send_metrics = false
 minify = false
 upload_source_maps = true
+
+[placement]
+mode = "off"
+region = "gcp:asia-southeast1"
 
 # uncomment to enable analytics on serverless-dns
 # this binding is not inherited by other worker-envs
@@ -25,9 +29,13 @@ type = "ESModule"
 globs = ["**/*.js"]
 
 [vars]
-LOG_LEVEL = "debug"
-WORKER_ENV = "development"
+LOG_LEVEL = "info"
+WORKER_ENV = "production"
 CLOUD_PLATFORM = "cloudflare"
+CF_DNS_RESOLVER_URL = "https://dns64.dns.google/dns-query"
+CF_DNS_RESOLVER_URL_2 = "https://dns64.dns.google/dns-query"
+DISABLE_BLOCKLISTS = "false"
+MAX_DNS_RESOLVER_URL = "https://dns64.dns.google/dns-query"
 
 ##################
 #------PROD------#
